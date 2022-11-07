@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from home import views as home_views
+
 urlpatterns = [
     path('favicon.ico', redirectView.as_view(url='static/favicon.ico')),
     path("admin/", admin.site.urls),
     
-    path('home/', include('home.urls'))
-    path('', home_views.home)
+    path('home/', include('home.urls')),
+    path('', home_views.home),
     path('yard/', include('yard.urls'))
-
 
 ]
