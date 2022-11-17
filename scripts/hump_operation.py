@@ -112,23 +112,59 @@ def run_hump_timer():
 
 
 
-def update_track_capacity(dbyard, trackid):
+def update_track_capacity(db, dbyard, trackid):
     '''Update the capacity column of the given track in the database.'''
-    currentcapacity = int(dbyard.at[trackid, 'car_capacity'])
-    print(dbyard.loc[[trackid]])
-    dbyard.at[trackid, 'car_capacity'] = currentcapacity - 1
-    print(dbyard.loc[[trackid]])
+    currentcapacity = int(dbyard.loc[dbyard['id'] == trackid, 'car_capacity'])
+    updatedcapacity = currentcapacity - 1
+    dbyard.loc[dbyard['id'] == trackid, ['car_capacity']] = updatedcapacity
 
-    #still need to update db
-    ...
+
+    #update db
+    cursor = db.cursor()
+    #SHOW TABLE FOR TESTING
+    #cursor.execute("SELECT * FROM testYard")
+    #print("=============== BEFORE =================")
+    #for x in cursor:
+    #    print(x)
+
+    cursor.execute("UPDATE testYard SET car_capacity =" + str(updatedcapacity) + " WHERE id = " + str(trackid))
+    # commits changes to db
+    #db.commit()
+
+    #SHOW TABLE FOR TESTING
+    #cursor.execute("SELECT * FROM testYard")
+    #print("=============== AFTER =================")
+    #for x in cursor:
+    #    print(x)
+
     return dbyard
 
 
-def update_car_location(car, dbcars):
+def update_car_location(db, car, dbcars):
     '''Update the location column of the given car in the database.'''
     print("car data gets added to the dbcars dataframe and the db gets updated")
-    pass
+    print(dbcars)
+    dbcars.loc[len(dbcars.index)] = [car['id'], car['EQUIPMENT_INITIAL'], car['EQUIPMENT_NUMBER'], car['CURRENT_YARD_CIRC7'], car['CURRENT_TRAIN_DATE']]
+    print(dbcars)
+    cursor = db.cursor()
 
+    # SHOW TABLE FOR TESTING
+    cursor.execute("SELECT * FROM testcars")
+    print("=============== BEFORE =================")
+    for x in cursor:
+        print(x)
+
+    cursor.execute("INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" + car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car['CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
+    # commits changes to db
+    #db.commit()
+
+    #SHOW TABLE FOR TESTING
+    cursor.execute("SELECT * FROM testcars")
+    print("=============== AFTER =================")
+    for x in cursor:
+        print(x)
+
+    return dbcars
 
 def main():
     #dataframe will be referred to as df
@@ -153,9 +189,9 @@ def main():
             to_track = car_tracks[x + 1]
 
         run_hump_timer()
-
-        dbyard = update_track_capacity(dbyard, to_track)
-        update_car_location(car, dbcars)
+        # updates the db and dataframe
+        dbyard = update_track_capacity(db, dbyard, to_track)
+        dbcars = update_car_location(db, car, dbcars)
 
 if __name__ == '__main__':
     main()
