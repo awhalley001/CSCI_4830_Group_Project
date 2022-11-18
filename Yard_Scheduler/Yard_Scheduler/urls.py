@@ -27,4 +27,6 @@ urlpatterns = [
     path('', home_views.home),
     # path('yard/', include('yard.urls'))
 
+    path('api-auth/', include('rest_framework.urls')),
+
 ]
