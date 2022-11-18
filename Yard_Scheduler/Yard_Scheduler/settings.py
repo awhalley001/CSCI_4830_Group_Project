@@ -78,11 +78,11 @@ WSGI_APPLICATION = "Yard_Scheduler.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+#  yard tracks is the default database for the project
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "testYard.ibd",
     }
 }
 
