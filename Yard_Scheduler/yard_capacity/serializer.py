@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from yard_capacity.models import Author
+from yard_capacity.models import Yard
 
-class AuthorSerializer(serializers.ModelSerializer):
+class YardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Author
-        fields = ["id", "first_name", "last_name", "birth_year"]
+        model = Yard
+        fields = ["id", "SBDV_NAME", "TRK_SYS_NBR", "dist", "car_capacity"]

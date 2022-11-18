@@ -82,7 +82,11 @@ WSGI_APPLICATION = "Yard_Scheduler.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": BASE_DIR / "testYard.ibd",
+        "NAME": "yardTracks",
+        'USER': 'newuser',
+        'PASSWORD': 'csci4830!',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
