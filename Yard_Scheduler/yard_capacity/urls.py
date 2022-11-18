@@ -10,5 +10,5 @@ urlpatterns = [
     # path('upload_author_photo/<int:author_id>/', views.upload_author_photo,
     #     name="upload_author_photo"),
 
-    path('list_tracks_api/', views.list_authors_api),
+    path('list_tracks_api/', views.list_tracks_api),
 ]
