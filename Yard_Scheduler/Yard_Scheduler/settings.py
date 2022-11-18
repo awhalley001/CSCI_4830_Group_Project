@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'yards',
     'yard_capacity',
     'track_capacity',
+    'rest_framework',
 
 ]
 
@@ -80,7 +81,7 @@ WSGI_APPLICATION = "Yard_Scheduler.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
