@@ -20,6 +20,18 @@ class Yard(models.Model):
     def get_track_car_capacity(self):
         return self.car_capacity
 
+class Testyard(models.Model):
+    sbdv_name = models.CharField(db_column='SBDV_NAME', max_length=30)  # Field name made lowercase.
+    trk_sys_nbr = models.CharField(db_column='TRK_SYS_NBR', max_length=30)  # Field name made lowercase.
+    dist = models.CharField(max_length=30)
+    car_capacity = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.sbdv_name
+
+    class Meta:
+        managed = True
+        db_table = 'testYard'
 
 class Car(models.Model):
     equipment_initial = models.TextField()

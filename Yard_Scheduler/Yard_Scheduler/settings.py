@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'home',
-    'yards',
     'yard_capacity',
-    'track_capacity',
     'rest_framework',
 
 ]
@@ -86,7 +84,7 @@ DATABASES = {
         'USER': 'newuser',
         'PASSWORD': 'csci4830!',
         'HOST': 'localhost',
-        'PORT': '3306'
+        'PORT': 3306
     }
 }
 
