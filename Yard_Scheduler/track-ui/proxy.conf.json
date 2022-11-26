@@ -1,0 +1,11 @@
+{
+  "/yard_capacity/list_tracks_api": {
+    "target": "http://localhost:8000",
+    "secure": false
+  },
+
+  "/uploadFile": {
+    "target": "http://localhost:8000",
+    "secure": false
+  }
+}

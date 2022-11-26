@@ -1,0 +1,6 @@
+<div class="content m-3">
+    <!-- <input type="file" class="file-upload" accept=".csv" onchange="console.log(event.target.files)"> -->
+    <label for="formFile" class="form-label my-3 fs-5"><strong>Select file and press upload when ready</strong></label><br>
+    <input #fileInput (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile" accept=".csv">
+    <button (click)="this.upload()" type="button" class="btn btn-success mt-3">Upload</button>
+</div>

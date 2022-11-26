@@ -1,0 +1,13 @@
+<div class="whole-app bg-light h-100">
+  <div class="header p-3 bg-primary shadow-sm">
+    <h1 class="fs-1 text-light">{{title}}</h1>
+  </div>
+
+  <div class="m-3">
+    <tabset>
+      <tab heading="Home" id="home" (selectTab)="tabSelected($event)"></tab>
+      <tab heading="Yard" id="yard" (selectTab)="tabSelected($event)"></tab>
+    </tabset>
+  </div>
+  <router-outlet></router-outlet>
+</div>

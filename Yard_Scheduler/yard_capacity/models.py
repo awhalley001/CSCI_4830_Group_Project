@@ -43,14 +43,6 @@ class Car(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    # class Meta:
-    #     ordering = ['id']
-    #     verbose_name = 'Bookington'
-    #     verbose_name_plural = 'Bookington McBookFace'
-    #     indexes = [
-    #         models.Index(fields=['trk', 'equipment_number']),
-    #     ]
-
     def __str__(self):
         return f"Car being humped (id={self.id}, " \
                f"car number={self.equipment_initial} " \
