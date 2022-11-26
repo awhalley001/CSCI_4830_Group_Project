@@ -15,8 +15,7 @@ from yard_capacity.serializer import YardSerializer
 def list_tracks_api(request):
     yard_tracks = Testyard.objects.all()
     serializer = YardSerializer(yard_tracks, many=True)
-    content = {
-        "Yard tracks": serializer.data,
-    }
+    content = serializer.data
+    
     print(content)
     return Response(content)
