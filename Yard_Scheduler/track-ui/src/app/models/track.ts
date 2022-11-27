@@ -1,7 +1,7 @@
 export interface Track {
   id: any,
-  SBDV_NAME: any,
-  TRK_SYS_NBR: any,
+  sbdv_name: any,
+  trk_sys_nbr: any,
   dist: any,
   car_capacity: any
 }
