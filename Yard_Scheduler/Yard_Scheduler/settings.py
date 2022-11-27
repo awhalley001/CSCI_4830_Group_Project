@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-n4jk11zskd%u&%r^maa!7q%g-t$y#l9jz)9bpw0fgm_oc433f=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", 'ec2-52-207-210-171.compute-1.amazonaws.com']
 
 
 # Application definition
@@ -82,7 +82,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "yardTracks",
         'USER': 'newuser',
-        'PASSWORD': 'csci4830!',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': 3306
     }
