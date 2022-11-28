@@ -47,14 +47,14 @@ export class YardComponent implements OnInit {
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: 'SBDV_NAME',
-        prop: 'SBDV_NAME'
+        name: 'sbdv_name',
+        prop: 'sbdv_name'
       },
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: 'TRK_SYS_NBR',
-        prop: 'TRK_SYS_NBR'
+        name: 'trk_sys_nbr',
+        prop: 'trk_sys_nbr'
       },
       {
         cellTemplate: this.editTmpl,
