@@ -13,7 +13,6 @@ from rest_framework.views import APIView
 from yard_capacity.models import Yard, Car, Testyard, handle_uploaded_file
 from yard_capacity.serializer import YardSerializer, FileSerializer
 
-from django.views.decorators.csrf import csrf_exempt
 
 from django.http import HttpResponseRedirect
 from yard_capacity.forms import UploadFileForm
@@ -28,16 +27,7 @@ def list_tracks_api(request):
     print(content)
     return Response(content)
 
-def upload_file(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
-    else:
-        form = UploadFileForm()
-    return render(request, 'upload.html', {'form': form})
-
+@csrf_exempt
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
