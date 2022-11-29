@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL =  True
@@ -62,6 +63,11 @@ CORS_ORIGIN_WHITELIST = [
     'http://0.0.0.0:8000',
 ]
 
+CSRF_COOKIE_PATH = 'http://0.0.0.0:8000'
+CSRF_COOKIE_DOMAIN =  'http://0.0.0.0:8000'
+CSRF_COOKIE_SECURE = False
+
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8000']
 
 ROOT_URLCONF = "Yard_Scheduler.urls"
 
