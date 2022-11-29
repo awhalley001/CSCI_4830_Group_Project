@@ -10,12 +10,12 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework import status
 from rest_framework.views import APIView
 
-from yard_capacity.models import Yard, Car, Testyard, handle_uploaded_file
+from yard_capacity.models import Yard, Car, Testyard
 from yard_capacity.serializer import YardSerializer, FileSerializer
 
-
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
-from yard_capacity.forms import UploadFileForm
+
 
 
 @api_view(["GET"])
@@ -27,7 +27,7 @@ def list_tracks_api(request):
     print(content)
     return Response(content)
 
-@csrf_exempt
+
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
