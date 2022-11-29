@@ -11,4 +11,5 @@ class YardSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = "__all__"
+        fields = ["id","EQUIPMENT_INITIAL","EQUIPMENT_NUMBER",
+                    "CURRENT_YARD_CIRC7","CURRENT_TRAIN_DATE","DEST_TRACK"]
