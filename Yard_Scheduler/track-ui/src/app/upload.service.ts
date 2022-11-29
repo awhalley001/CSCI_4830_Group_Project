@@ -15,6 +15,6 @@ export class UploadService {
    let formParams = new FormData();
    formParams.append('file', file)
    console.log(file);
-   return this.httpClient.post('http://localhost:8000/uploadFile', formParams);
+   return this.httpClient.post('http://ec2-54-91-175-209.compute-1.amazonaws.com:8000/uploadFile', formParams);
  }
 }

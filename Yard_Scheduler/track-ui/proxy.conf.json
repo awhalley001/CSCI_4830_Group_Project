@@ -1,11 +1,11 @@
 {
   "/yard_capacity/list_tracks_api": {
-    "target": "http://localhost:8000",
+    "target": "http://ec2-54-91-175-209.compute-1.amazonaws.com:8000",
     "secure": false
   },
 
   "/uploadFile": {
-    "target": "http://localhost:8000",
+    "target": "http://ec2-54-91-175-209.compute-1.amazonaws.com:8000",
     "secure": false
   }
 }
