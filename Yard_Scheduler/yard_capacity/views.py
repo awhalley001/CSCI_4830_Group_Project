@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from yard_capacity.models import Yard, Car, Testyard
 from yard_capacity.serializer import YardSerializer, FileSerializer
 
+from django.views.decorators.csrf import csrf_exempt
 
 @api_view(["GET"])
 def list_tracks_api(request):
@@ -23,7 +24,7 @@ def list_tracks_api(request):
     print(content)
     return Response(content)
 
-
+@csrf_exempt
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
