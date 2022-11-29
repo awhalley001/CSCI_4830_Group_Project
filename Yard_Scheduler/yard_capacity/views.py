@@ -13,10 +13,6 @@ from rest_framework.views import APIView
 from yard_capacity.models import Yard, Car, Testyard
 from yard_capacity.serializer import YardSerializer, FileSerializer
 
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect
-
-
 
 @api_view(["GET"])
 def list_tracks_api(request):
@@ -31,7 +27,6 @@ def list_tracks_api(request):
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
-   
     def post(self, request, *args, **kwargs):
 
       file_serializer = FileSerializer(data=request.data)
@@ -41,5 +36,3 @@ class FileUploadView(APIView):
           return Response(file_serializer.data, status=status.HTTP_201_CREATED)
       else:
           return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
