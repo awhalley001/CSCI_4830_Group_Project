@@ -61,15 +61,15 @@ CORS_ORIGIN_ALLOW_ALL =  True
 
 CORS_ORIGIN_WHITELIST = [
     'http://0.0.0.0:8000',
-    'ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*'
+    'http://ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*'
 
 ]
 
-CSRF_COOKIE_PATH = 'http://0.0.0.0:8000', 'ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*'
-CSRF_COOKIE_DOMAIN =  'http://0.0.0.0:8000', 'ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*'
+CSRF_COOKIE_PATH = 'http://0.0.0.0:8000', 'http://ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*'
+CSRF_COOKIE_DOMAIN =  'http://0.0.0.0:8000', 'http://ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*'
 CSRF_COOKIE_SECURE = False
 
-CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8000', 'ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*']
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8000', 'http://ec2-54-91-175-209.compute-1.amazonaws.com:8000', '*']
 
 ROOT_URLCONF = "Yard_Scheduler.urls"
 
