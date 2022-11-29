@@ -10,10 +10,14 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework import status
 from rest_framework.views import APIView
 
-from yard_capacity.models import Yard, Car, Testyard
+from yard_capacity.models import Yard, Car, Testyard, handle_uploaded_file
 from yard_capacity.serializer import YardSerializer, FileSerializer
 
 from django.views.decorators.csrf import csrf_exempt
+
+from django.http import HttpResponseRedirect
+from yard_capacity.forms import UploadFileForm
+
 
 @api_view(["GET"])
 def list_tracks_api(request):
@@ -24,10 +28,20 @@ def list_tracks_api(request):
     print(content)
     return Response(content)
 
-@csrf_exempt
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})
+
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
 
       file_serializer = FileSerializer(data=request.data)
@@ -37,3 +51,5 @@ class FileUploadView(APIView):
           return Response(file_serializer.data, status=status.HTTP_201_CREATED)
       else:
           return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
