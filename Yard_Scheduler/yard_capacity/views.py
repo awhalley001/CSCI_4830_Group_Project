@@ -31,7 +31,7 @@ def list_tracks_api(request):
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
-    @csrf_exempt
+   
     def post(self, request, *args, **kwargs):
 
       file_serializer = FileSerializer(data=request.data)

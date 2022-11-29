@@ -53,7 +53,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL =  True
@@ -99,8 +99,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "yardTracks",
         'USER': 'newuser',
-        'PASSWORD': 'password',
-        #'PASSWORD': 'csci4830!',
+        #'PASSWORD': 'password',
+        'PASSWORD': 'csci4830!',
         'HOST': 'localhost',
         'PORT': 3306
     }
