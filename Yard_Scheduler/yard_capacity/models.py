@@ -47,3 +47,9 @@ class Car(models.Model):
         return f"Car being humped (id={self.id}, " \
                f"car number={self.equipment_initial} " \
                f"{self.equipment_number}, on track number {self.trk})"
+
+
+class File(models.Model):
+    file = models.FileField(blank=False, null=False)
+    def __str__(self):
+        return self.file.name
