@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from yard_capacity.models import Yard,Testyard, File
+from yard_capacity.models import Yard,Testyard, File, Posts
 
 
 class YardSerializer(serializers.ModelSerializer):
@@ -11,5 +11,11 @@ class YardSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
+        fields = ["id","EQUIPMENT_INITIAL","EQUIPMENT_NUMBER",
+                    "CURRENT_YARD_CIRC7","CURRENT_TRAIN_DATE","DEST_TRACK"]
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Posts
         fields = ["id","EQUIPMENT_INITIAL","EQUIPMENT_NUMBER",
                     "CURRENT_YARD_CIRC7","CURRENT_TRAIN_DATE","DEST_TRACK"]

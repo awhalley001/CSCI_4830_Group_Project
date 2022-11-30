@@ -53,3 +53,10 @@ class File(models.Model):
     file = models.FileField(blank=False, null=False)
     def __str__(self):
         return self.file.name
+
+class Posts(models.Model):
+    equipment_initial = models.TextField()
+    equipment_number = models.IntegerField()
+    current_yard_circ_7 = models.IntegerField()
+    current_train_date = models.TextField()
+    dest_track = models.IntegerField()
