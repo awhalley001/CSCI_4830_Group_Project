@@ -15,9 +15,8 @@ from yard_capacity.forms import DocumentForm
 
 from yard_capacity.models import Yard, Car, Testyard, Posts
 from yard_capacity.serializer import YardSerializer, FileSerializer, PostSerializer
-from yard_capacity.utils import MultipartJsonParser, DbClass 
+from yard_capacity.utils import MultipartJsonParser, DbClass, handle_uploaded_file
 
-import yard_capacity.handle_uploaded_file as handle_file
 
 db = DbClass()
 
@@ -30,11 +29,12 @@ def home(response):
     if response.method == 'POST':
         form = DocumentForm(response.POST, response.FILES)
         if form.is_valid():
-            handle_file(response.FILES['file'])
-            return HttpResponseRedirect('yard')
+            handle_uploaded_file(response.FILES['file'])
+            return HttpResponseRedirect('yard_capacity/create/')
     else:
         form = DocumentForm()
     return render(response, 'home.html', {'form': form})
+
 
 def create(response):
     ls = db.providecarstable()
