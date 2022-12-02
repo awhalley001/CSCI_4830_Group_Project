@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Yard Scheduler Application{% endblock %}</title>
+
+
+
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+
+  {% block extra_head %}{% endblock %}
+  {% block extra_script %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-toggleable-md navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">
+    <img class="logo-img" src="{% static 'favicon.ico' %}">
+  </a>
+  <a href="{% url 'home' %}">Home</a>
+  <a href="{% url 'yard' %}">Yard</a>
+  <a href="{% url 'create' %}">Create</a>
+
+</nav>
+
+{% block container %}
+  <main role="main" class="container">
+    {% block content %}
+
+    {% endblock content %}
+  </main>
+{% endblock container %}
+
+
+
+{% block body_script %}{% endblock %}
+
+</body>
+</html>

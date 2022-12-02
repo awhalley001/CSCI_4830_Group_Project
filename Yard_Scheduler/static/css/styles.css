@@ -65,8 +65,25 @@
     font-size: 14pt;
   }
 
+  .form {
+    background-color: #FF4D12; /* Green */
+    border: none;
+    border-radius: 7px;;
+    color: white;
+    padding: 10px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14pt;
+  }
+
+
   .button:hover {
     background-color: #FF6633;
     cursor: pointer;
   }
 
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+  }

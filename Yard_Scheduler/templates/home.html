@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+ {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <script src="script.js"></script>
+</head> 
+{% block title %}Yard Scheduler{%  endblock %}
+
+{% block content %}
+    <h1>Home Page</h1>
+    <form method="POST" enctype="multipart/form-data">
+    {%  csrf_token %}
+    {{ form.as_p }}
+    <button class="button", type="submit", name="hump">Hump Operation</button>
+    </form>
+{% endblock %}

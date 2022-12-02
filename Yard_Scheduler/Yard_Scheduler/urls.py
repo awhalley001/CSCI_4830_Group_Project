@@ -18,16 +18,14 @@ from django.urls import path, include
 from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
-from home import views as home_views
+from yard_capacity import views as yard_cap_views
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='static/favicon.ico')),
     path("admin/", admin.site.urls),
     
-    path('home/', include('home.urls')),
-    path('', home_views.home),
-
     path('yard_capacity/', include('yard_capacity.urls')),
+    path('', yard_cap_views.home),
 
     path('api-auth/', include('rest_framework.urls')),
 

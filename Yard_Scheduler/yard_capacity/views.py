@@ -15,9 +15,39 @@ from yard_capacity.forms import DocumentForm
 
 from yard_capacity.models import Yard, Car, Testyard, Posts
 from yard_capacity.serializer import YardSerializer, FileSerializer, PostSerializer
-from yard_capacity.utils import MultipartJsonParser
+from yard_capacity.utils import MultipartJsonParser, DbClass 
 
 import yard_capacity.handle_uploaded_file as handle_file
+
+db = DbClass()
+
+
+def index(response, id):
+    ls = db.providetrackstable()
+    return render(response, "yard.html", {"ls":ls})
+
+def home(response):
+    if response.method == 'POST':
+        form = DocumentForm(response.POST, response.FILES)
+        if form.is_valid():
+            handle_file(response.FILES['file'])
+            return HttpResponseRedirect('yard')
+    else:
+        form = DocumentForm()
+    return render(response, 'home.html', {'form': form})
+
+def create(response):
+    ls = db.providecarstable()
+    return render(response, "create.html", {"ls": ls})
+
+def yard(response):
+    ls = db.providetrackstable()
+    return render(response, "yard.html", {"ls": ls})
+
+def yard_tracks(request):
+    data = {'yard':Testyard.objects.all()}
+    print(data)
+    return render(request, 'yard_tracks.html', data)
 
 @api_view(["GET"])
 def list_tracks_api(request):
@@ -26,16 +56,6 @@ def list_tracks_api(request):
     content = serializer.data
     
     return Response(content)
-
-def home(response):
-    if response.method == 'POST':
-        form = DocumentForm(response.POST, response.FILES)
-        if form.is_valid():
-            handle_file(response.Files['file'])
-            return HttpResponseRedirect('yard')
-        else:
-            form = DocumentForm()
-        return(response, '/index.html', {'form':form})
 
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
@@ -55,3 +75,4 @@ class PostsViewset(viewsets.ModelViewSet):
     parser_classes = (MultipartJsonParser, parsers.JSONParser)
     queryset = Posts.objects.all()
     lookup_field = 'id'
+

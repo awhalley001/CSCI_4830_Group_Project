@@ -1,0 +1,39 @@
+{%  extends "base.html" %}
+{% block title %}Yard Page{% endblock %}
+
+{% block content %}
+
+    <h1>
+    <style>
+    h1 {text-align: center;}
+    p {text-align: center;}
+    div {text-align: center;}
+     table, th, td {
+        border: 2px solid white;
+        border-collapse: collapse;
+     } 
+    </style>
+    Yard Table </h1>
+    <style>
+    table.center {
+    margin-left: auto; 
+    margin-right: auto;
+    }
+    </style>
+    <table class="center" style="height:75%;width:100%;">
+    <tr style="height: 25%;">
+        <th>id</th>
+        <th>SBDV_NAME</th>
+        <th>TRK_SYS_NBR</th>
+        <th>dist</th>
+        <th>car_capacity</th>
+    </tr>
+    {% for item in ls %}
+        <tr style="height: 75%;"> 
+        {% for x in item %}
+        <td style="text-align:center">{{ x }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
