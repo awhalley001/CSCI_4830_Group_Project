@@ -7,6 +7,7 @@ import mysql.connector
 def handle_uploaded_file(f):
     with open('/home/adamhalley/github/CSCI_4830_Group_Project/scripts/CAR_SAMPLE.CSV', 'wb+') as destination:
         for chunk in f.chunks():
+            print(chunk)
             destination.write(chunk)
 
 
