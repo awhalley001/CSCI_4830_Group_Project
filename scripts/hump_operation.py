@@ -2,7 +2,7 @@ import os
 import mysql.connector
 import pandas
 import csv
-from . import hump_timer
+import hump_timer
 
 class dbClass:
     def __init__(self):
@@ -41,7 +41,7 @@ class dbClass:
         updatedcapacity = currentcapacity - 1
         # update df
         self.dbyard.loc[self.dbyard['id'] == trackid, ['car_capacity']] = updatedcapacity
-        print(self.dbyard)
+        #print(self.dbyard)
         # update db
         self.cursor.execute("UPDATE testYard SET car_capacity =" + str(updatedcapacity) + " WHERE id = " + str(trackid))
         # commits changes to db
@@ -58,19 +58,19 @@ class dbClass:
         self.cursor.execute(
             "INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" +
             car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car[
-                'CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
+                'CURRENT_YARD'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
         # commits changes to db
         self.db.commit()
 
     def showtable(self):
         # SHOW TABLE FOR TESTING
-        self.cursor.execute("SELECT * FROM testcars")
+        self.cursor.execute("SELECT * FROM testCars")
         for x in self.cursor:
             print(x)
 
     def wipe(self):
-        self.cursor.execute("TRUNCATE testcars")
-        self.cursor.execute("UPDATE testyard SET car_capacity = 49")
+        self.cursor.execute("TRUNCATE testCars")
+        self.cursor.execute("UPDATE testYard SET car_capacity = 49")
         self.db.commit()
 
 
@@ -107,7 +107,8 @@ def main():
     os.chdir("scripts/")
     numberoftracks=49
     # returns pandas df of car_data.txt file
-    uploadedcardata = get_cars_csv("CAR_SAMPLE.csv")
+    print(os.getcwd())
+    uploadedcardata = get_cars_csv("CAR_SAMPLE.CSV")
 
     db = dbClass()
     db.wipe()

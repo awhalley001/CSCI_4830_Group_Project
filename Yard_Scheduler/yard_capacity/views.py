@@ -34,7 +34,7 @@ def home(response):
         form = DocumentForm(response.POST, response.FILES)
         if form.is_valid():
             handle_uploaded_file(response.FILES['file'])
-            script_dir = '~/CSCI_4830_Group_Project/scripts'
+            script_dir = '/home/ubuntu/CSCI_4830_Group_Project/scripts'
             out = run([sys.executable, script_dir + '/hump_operation.py'])
             return HttpResponseRedirect('yard_capacity/create/')
     else:
