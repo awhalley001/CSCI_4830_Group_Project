@@ -36,7 +36,7 @@ def home(response):
             handle_uploaded_file(response.FILES['file'])
             script_dir = '/home/ubuntu/CSCI_4830_Group_Project/scripts'
             out = run([sys.executable, script_dir + '/hump_operation.py'])
-            return HttpResponseRedirect('yard_capacity/create/')
+            return HttpResponseRedirect('/yard_capacity/create/')
     else:
         form = DocumentForm()
     return render(response, 'home.html', {'form': form})

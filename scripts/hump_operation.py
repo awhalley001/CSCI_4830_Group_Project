@@ -58,7 +58,7 @@ class dbClass:
         self.cursor.execute(
             "INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" +
             car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car[
-                'CURRENT_YARD'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
+                'CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
         # commits changes to db
         self.db.commit()
 
@@ -112,10 +112,12 @@ def main():
 
     db = dbClass()
     db.wipe()
+    db = dbClass()
     # returns column from yarddata dataframe
     car_tracks = get_incoming_cars_track(db.dbyard)
 
     for x in range(len(uploadedcardata.index)):
+        db = dbClass()
         y=x%50
         car = uploadedcardata.iloc[x]
 
