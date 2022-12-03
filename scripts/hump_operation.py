@@ -1,15 +1,16 @@
 import mysql.connector
 import pandas
 import csv
-from . import hump_timer
+import hump_timer
+import os
 
 class dbClass:
     def __init__(self):
         self.db = mysql.connector.connect(
         auth_plugin="mysql_native_password",
         host="localhost",
-        user="root",
-        password="jollyStarter22",
+        user="newuser",
+        password="csci4830!",
         database="yardTracks"
     )
         self.cursor = self.db.cursor()
@@ -51,18 +52,18 @@ class dbClass:
         print("car data gets added to the dbcars dataframe and the db gets updated")
         # update df
         self.dbcars.loc[len(self.dbcars.index)] = [car['id'], car['EQUIPMENT_INITIAL'], car['EQUIPMENT_NUMBER'],
-                                         car['CURRENT_YARD_CIRC7'], car['CURRENT_TRAIN_DATE']]
+                                         car['CURRENT_YARD'], car['CURRENT_TRAIN_DATE']]
         # update db
         self.cursor.execute(
             "INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" +
             car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car[
-                'CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
+                'CURRENT_YARD'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
         # commits changes to db
         # db.commit()
 
     def showtable(self):
         # SHOW TABLE FOR TESTING
-        self.cursor.execute("SELECT * FROM testcars")
+        self.cursor.execute("SELECT * FROM testCars")
         for x in self.cursor:
             print(x)
 
@@ -97,7 +98,10 @@ def run_hump_timer():
 
 def main():
     # returns pandas df of car_data.txt file
-    uploadedcardata = get_cars_csv("CAR_DATA1.csv")
+    os.chdir("../")
+    os.chdir("scripts/")
+    
+    uploadedcardata = get_cars_csv("CAR_SAMPLE.CSV")
 
     db = dbClass()
 
@@ -107,9 +111,11 @@ def main():
     for x in range(len(uploadedcardata.index)):
         car = uploadedcardata.iloc[x]
         to_track = car_tracks[x]
-
+        
+     
         while is_track_full(db.dbyard, to_track):
-            to_track = car_tracks[x + 1]
+            if (x+1) < len(car_tracks):
+                to_track = car_tracks[x + 1]
 
         run_hump_timer()
         # updates the db and dataframe
