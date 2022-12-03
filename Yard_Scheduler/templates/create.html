@@ -2,10 +2,24 @@
 {% block title %}Car Page{% endblock %}
 
 {% block content %}
-
+    <style>
+    h1 {text-align: center;}
+    p {text-align: center;}
+    div {text-align: center;}
+     table, th, td {
+        border: 2px solid white;
+        border-collapse: collapse;
+     } 
+    </style>
     <h1>Car Table</h1>
-    <table>
-    <tr>
+    <style>
+        table.center {
+        margin-left: auto; 
+        margin-right: auto;
+        }
+        </style>
+    <table class="center" style="height:75%;width:100%;">
+    <tr style="height: 25%;">
         <th>id</th>
         <th>EQUIPMENT_INITIAL</th>
         <th>EQUIPMENT_NUMBER</th>
@@ -13,9 +27,9 @@
         <th>CURRENT_TRAIN_DATE</th>
     </tr>
     {% for item in ls %}
-        <tr>
+        <tr style="height: 75%;">
         {% for x in item %}
-        <td>{{ x }}</td>
+        <td style="text-align:center">{{ x }}</td>
         {% endfor %}
         </tr>
     {% endfor %}

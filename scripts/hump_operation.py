@@ -111,11 +111,9 @@ def main():
     for x in range(len(uploadedcardata.index)):
         car = uploadedcardata.iloc[x]
         to_track = car_tracks[x]
-        
-     
+    
         while is_track_full(db.dbyard, to_track):
-            if (x+1) < len(car_tracks):
-                to_track = car_tracks[x + 1]
+            to_track = car_tracks[x + 1]
 
         run_hump_timer()
         # updates the db and dataframe
