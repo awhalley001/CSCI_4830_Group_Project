@@ -52,3 +52,7 @@ class DbClass:
         for x in self.cursor:
             table.append(x)
         return table
+
+    def close(self):
+        self.cursor.close()
+        self.db.close()

@@ -22,11 +22,13 @@ from yard_capacity.utils import MultipartJsonParser, DbClass, handle_uploaded_fi
 
 from subprocess import run
 
-db = DbClass()
+#db = DbClass()
 
 
 def index(response, id):
+    db = DbClass()
     ls = db.providetrackstable()
+    db.close()
     return render(response, "yard.html", {"ls":ls})
 
 def home(response):
@@ -43,11 +45,15 @@ def home(response):
 
 
 def create(response):
+    db = DbClass()
     ls = db.providecarstable()
+    db.close()
     return render(response, "create.html", {"ls": ls})
 
 def yard(response):
+    db = DbClass()
     ls = db.providetrackstable()
+    db.close()
     return render(response, "yard.html", {"ls": ls})
 
 def yard_tracks(request):
