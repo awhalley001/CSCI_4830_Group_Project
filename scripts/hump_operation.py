@@ -9,8 +9,8 @@ class dbClass:
         self.db = mysql.connector.connect(
         auth_plugin="mysql_native_password",
         host="localhost",
-        user="root",
-        password="jollyStarter22",
+        user="newuser",
+        password="password",
         database="yardTracks"
     )
         self.cursor = self.db.cursor()
@@ -18,6 +18,9 @@ class dbClass:
         self.dbyard = self.get_track_data()
         # pandas df of testCars table in db
         #self.dbcars = self.get_cars_data()
+    def close(self):
+        self.cursor.close()
+        self.db.close()
 
     def get_cars_data(self):
         pass
@@ -128,7 +131,7 @@ def main():
         # updates the db and dataframe
         db.update_track_capacity(to_track)
         db.update_car_location(car)
-
+    db.close()
 
 if __name__ == '__main__':
     main()
