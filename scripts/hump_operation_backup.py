@@ -1,8 +1,8 @@
-import os
 import mysql.connector
 import pandas
 import csv
-from . import hump_timer
+import hump_timer
+import os
 
 class dbClass:
     def __init__(self):
@@ -10,17 +10,16 @@ class dbClass:
         auth_plugin="mysql_native_password",
         host="localhost",
         user="newuser",
-        password="password",
+        password="csci4830!",
         database="yardTracks"
     )
         self.cursor = self.db.cursor()
         # pandas df of testYard table in db
         self.dbyard = self.get_track_data()
         # pandas df of testCars table in db
-        #self.dbcars = self.get_cars_data()
+        self.dbcars = self.get_cars_data()
 
     def get_cars_data(self):
-        pass
         '''Get the cars table from database.'''
         self.cursor.execute("SELECT id, EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE FROM testCars")
         df = pandas.DataFrame(self.cursor.fetchall())
@@ -41,37 +40,32 @@ class dbClass:
         updatedcapacity = currentcapacity - 1
         # update df
         self.dbyard.loc[self.dbyard['id'] == trackid, ['car_capacity']] = updatedcapacity
-        print(self.dbyard)
+
         # update db
         self.cursor.execute("UPDATE testYard SET car_capacity =" + str(updatedcapacity) + " WHERE id = " + str(trackid))
         # commits changes to db
-        self.db.commit()
+        # db.commit()
 
 
     def update_car_location(self, car):
         '''Update the location column of the given car in the database.'''
         print("car data gets added to the dbcars dataframe and the db gets updated")
         # update df
-        #self.dbcars.loc[len(self.dbcars.index)] = [car['id'], car['EQUIPMENT_INITIAL'], car['EQUIPMENT_NUMBER'],
-                                        # car['CURRENT_YARD_CIRC7'], car['CURRENT_TRAIN_DATE']]
+        self.dbcars.loc[len(self.dbcars.index)] = [car['id'], car['EQUIPMENT_INITIAL'], car['EQUIPMENT_NUMBER'],
+                                         car['CURRENT_YARD'], car['CURRENT_TRAIN_DATE']]
         # update db
         self.cursor.execute(
             "INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" +
             car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car[
-                'CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
+                'CURRENT_YARD'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
         # commits changes to db
-        self.db.commit()
+        # db.commit()
 
     def showtable(self):
         # SHOW TABLE FOR TESTING
-        self.cursor.execute("SELECT * FROM testcars")
+        self.cursor.execute("SELECT * FROM testCars")
         for x in self.cursor:
             print(x)
-
-    def wipe(self):
-        self.cursor.execute("TRUNCATE testcars")
-        self.cursor.execute("UPDATE testyard SET car_capacity = 49")
-        self.db.commit()
 
 
 def get_incoming_cars_track(yarddata):
@@ -103,25 +97,23 @@ def run_hump_timer():
 
 
 def main():
+    # returns pandas df of car_data.txt file
     os.chdir("../")
     os.chdir("scripts/")
-    numberoftracks=49
-    # returns pandas df of car_data.txt file
-    uploadedcardata = get_cars_csv("CAR_SAMPLE.csv")
+    
+    uploadedcardata = get_cars_csv("CAR_SAMPLE.CSV")
 
     db = dbClass()
-    db.wipe()
+
     # returns column from yarddata dataframe
     car_tracks = get_incoming_cars_track(db.dbyard)
 
     for x in range(len(uploadedcardata.index)):
-        y=x%50
         car = uploadedcardata.iloc[x]
-
-        to_track = car_tracks[y]
-
-        while is_track_full(db.dbyard, y):
-            to_track = car_tracks[y + 1]
+        to_track = car_tracks[x]
+    
+        while is_track_full(db.dbyard, to_track):
+            to_track = car_tracks[x + 1]
 
         run_hump_timer()
         # updates the db and dataframe

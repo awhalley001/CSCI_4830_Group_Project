@@ -99,8 +99,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "yardTracks",
         'USER': 'newuser',
-        #'PASSWORD': 'password',
-        'PASSWORD': 'csci4830!',
+        'PASSWORD': 'password',
+        #'PASSWORD': 'csci4830!',
         'HOST': 'localhost',
         'PORT': 3306
     }
