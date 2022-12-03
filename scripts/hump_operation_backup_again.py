@@ -9,8 +9,8 @@ class dbClass:
         self.db = mysql.connector.connect(
         auth_plugin="mysql_native_password",
         host="localhost",
-        user="root",
-        password="jollyStarter22",
+        user="newuser",
+        password="password",
         database="yardTracks"
     )
         self.cursor = self.db.cursor()
@@ -55,8 +55,10 @@ class dbClass:
         #self.dbcars.loc[len(self.dbcars.index)] = [car['id'], car['EQUIPMENT_INITIAL'], car['EQUIPMENT_NUMBER'],
                                         # car['CURRENT_YARD_CIRC7'], car['CURRENT_TRAIN_DATE']]
         # update db
-        #self.cursor.execute("INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" + car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car['CURRENT_YARD'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
-        self.cursor.execute("INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" + car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car['CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
+        self.cursor.execute(
+            "INSERT INTO testCars(EQUIPMENT_INITIAL, EQUIPMENT_NUMBER, CURRENT_YARD, CURRENT_TRAIN_DATE) VALUES (\'" +
+            car['EQUIPMENT_INITIAL'] + "\',\'" + str(car['EQUIPMENT_NUMBER']) + "\',\'" + car[
+                'CURRENT_YARD_CIRC7'] + "\',\'" + car['CURRENT_TRAIN_DATE'] + "\')")
         # commits changes to db
         self.db.commit()
 
@@ -115,7 +117,7 @@ def main():
     car_tracks = get_incoming_cars_track(db.dbyard)
 
     for x in range(len(uploadedcardata.index)):
-        db=dbClass()
+        db = dbClass()
         y=x%50
         car = uploadedcardata.iloc[x]
 
