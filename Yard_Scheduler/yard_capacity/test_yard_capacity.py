@@ -2,8 +2,8 @@ from django.test import TestCase
 from django.test import Client
 
 from yard_capacity.models import Yardtracks, Testyard, create
-
-class CatalogTestCase(TestCase):
+# initial test case for yard capacity app and rest framework api
+class YardCapcityTestCase(TestCase):
 
     def test_stringify(self):
         self.print_state("Starting test_stringify()")

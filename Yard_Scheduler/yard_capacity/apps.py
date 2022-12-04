@@ -1,3 +1,5 @@
+# config app to be used throughout project
+
 from django.apps import AppConfig
 
 
