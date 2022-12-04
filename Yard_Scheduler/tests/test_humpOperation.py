@@ -24,7 +24,7 @@ class TestHumpOperation():
     self.driver.find_element(By.NAME, "hump").click()
     self.driver.find_element(By.LINK_TEXT, "Yard").click()
     self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > td:nth-child(5)").click()
-    assert self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > td:nth-child(5)").text == "0"
+    assert self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > td:nth-child(5)").text == "25"
     self.driver.find_element(By.LINK_TEXT, "Create").click()
-    assert self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > td:nth-child(1)").text == "1"
+    assert self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > td:nth-child(2)").text == "ACME"
   

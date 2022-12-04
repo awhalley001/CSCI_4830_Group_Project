@@ -10,7 +10,7 @@ class dbClass:
         auth_plugin="mysql_native_password",
         host="localhost",
         user="newuser",
-        password="password",
+        password="csci4830!",
         database="yardTracks"
     )
         self.cursor = self.db.cursor()
